@@ -17,18 +17,18 @@ Or install it yourself as:
     $ gem install persistent_blocks
 
 ## Usage
-
-    require 'persistent_blocks'
-    extend PersistentBlocks
+```ruby
+require 'persistent_blocks'
+extend PersistentBlocks
+		
+persist :first_persisted do
+	'Here is the first persistent data'
+end
     
-    persist :first_persisted do
-    	    'Here is the first persistent data'
-    end
-    
-    persist do |first_persisted|	
-    	    puts first_persisted # => 'Here is the first persistent
-    	    data'
-    end
+persist do |first_persisted|	
+	puts first_persisted # => 'Here is the first persistent data'
+end
+```
 
 ## Contributing
 
