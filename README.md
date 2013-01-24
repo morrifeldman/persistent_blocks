@@ -1,6 +1,6 @@
 # PersistentBlocks
 
-TODO: Write a gem description
+Persist the output of ruby blocks
 
 ## Installation
 
@@ -18,7 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'persistent_blocks'
+    extend PersistentBlocks
+    
+    persist :first_persisted do
+    	    'Here is the first persistent data'
+    end
+    
+    persist do |first_persisted|	
+    	    puts first_persisted # => 'Here is the first persistent
+    	    data'
+    end
 
 ## Contributing
 
