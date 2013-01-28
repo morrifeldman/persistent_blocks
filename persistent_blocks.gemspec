@@ -1,21 +1,15 @@
-require 'persistent_blocks/version'
-
 Gem::Specification.new do |gem|
   gem.name          = "persistent_blocks"
-  gem.version       = PersistentBlocks::VERSION
-  gem.authors       = ["Morris Feldman"]
-  gem.email         = ["morrifeldman@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
+  gem.version       = "0.0.3"
+  gem.author        = "Morris Feldman"
+  gem.email         = "morrifeldman@gmail.com"
   gem.summary       = "Persists the output of Ruby blocks"
   gem.homepage      = "http://github.com/morrifeldman/persistent_blocks"
 
   gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
   
   gem.add_runtime_dependency 'rake'
-  gem.add_development_dependency 'debugger'
+
   gem.description       = <<EODESC
   This gem provides a rake extension to wrap blocks of ruby code so
   that the output of the block is persisted using marshal.  Blocks
