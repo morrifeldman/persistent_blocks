@@ -17,7 +17,7 @@ describe 'persistent_blocks' do
     
       puts "\nRunning tests for the second time:\n"
       puts @second_run = run_rakefile
-
+      
       # clean up
       puts run_rakefile('clobber')
     end
@@ -26,3 +26,6 @@ describe 'persistent_blocks' do
     @second_run.must_equal ''
   end
 end
+
+      
+

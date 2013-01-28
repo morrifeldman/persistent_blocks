@@ -19,7 +19,7 @@ persist :test3, :test4  do |test2|
   puts "About to simulate a 3 sec calc"
   sleep(3)
   puts "test2 = #{test2}"
-  puts "test2 should not be an array"
+  puts "test2 = '#{test2}', it should not be an array"
   [test2*1, test2.upcase]
 end
 
