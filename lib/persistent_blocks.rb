@@ -105,7 +105,8 @@ module PBsubs
       how_long = (output.respond_to?:length) ? output.length : nil
       "#{sym} (length = #{how_long})"
     end
-    p output_ar
+    puts "Block Outputs:"
+    puts output_ar
   end
   
   def ensure_marshal_dir

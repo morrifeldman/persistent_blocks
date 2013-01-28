@@ -1,6 +1,3 @@
-# -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'persistent_blocks/version'
 
 Gem::Specification.new do |gem|
@@ -19,12 +16,13 @@ Gem::Specification.new do |gem|
   
   gem.add_runtime_dependency 'rake'
   gem.add_development_dependency 'debugger'
-  gem.description       = <<desc
+  gem.description       = <<EODESC
   This gem provides a rake extension to wrap blocks of ruby code so
   that the output of the block is persisted using marshal.  Blocks
   with persisted data will not be rerun and their data is available to
   subsequent blocks which can themselves generate persistent data.
   This allow a very simple and robust pipeline to be constructed in
   within a regular rakefile.   
-desc
+EODESC
+  
 end
