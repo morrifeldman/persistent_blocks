@@ -1,8 +1,10 @@
-require "persistent_blocks/version"
 require 'rake/clean'
 
 module PersistentBlocks
+  extend self
+
   def persist(*args, &block)
+    #puts "#{__FILE__}"
     output_syms, specified_output_files, options = PBsubs.parse_inputs(args)
     marshal_output_files = PBsubs.sym_ar_to_file_list(output_syms)
     marshal_dir = PBsubs.ensure_marshal_dir
@@ -10,7 +12,7 @@ module PersistentBlocks
     all_output_files = marshal_output_files + specified_output_files
     target_file = all_output_files[0] # rake tasks only accept one file
     params = if options[:input_overide]
-               options[:input_overide]
+               [*options[:input_overide]]
              else
                block.parameters.map{|p| p[1]}
              end
@@ -31,11 +33,14 @@ module PersistentBlocks
         PBsubs.check_specified_output_files(specified_output_files)
       end
     end
-    task default: target_file
+    options[:task] ||= PBsubs.default_persistent_blocks_task
+    task options[:task].to_sym => target_file
     (output_syms + specified_output_files).each do |file_or_sym|
-      task "delete_#{file_or_sym}" do
+      delete_task = "delete_#{file_or_sym}"
+      task delete_task do
         all_output_files.each {|f| rm f}
       end
+      task "delete_#{options[:task].to_sym}" => delete_task
     end
     specified_output_files.each do |file|
       CLOBBER.include(file)
@@ -47,8 +52,10 @@ end
 module PBsubs
   extend Rake::DSL
   extend self
-  @marshal_dir = 'marshal_dir'
-  attr_accessor :marshal_dir
+  
+  attr_accessor :marshal_dir, :default_persistent_blocks_task
+  @marshal_dir ||= 'marshal_dir'
+  @default_persistent_blocks_task ||= :default
 
   def ensure_array(raw, n_expected)
     (n_expected == 1) ? [raw] : raw
@@ -71,7 +78,6 @@ module PBsubs
   end
 
   def marshal_load(filename)
-    #will add '.marshal' to the filename if necessary
     File.open(filename, 'r') {|io| Marshal.load(io)}
   end
 

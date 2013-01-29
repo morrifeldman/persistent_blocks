@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "persistent_blocks"
-  gem.version       = "0.0.3"
+  gem.version       = "0.1.0"
   gem.author        = "Morris Feldman"
   gem.email         = "morrifeldman@gmail.com"
   gem.summary       = "Persists the output of Ruby blocks"

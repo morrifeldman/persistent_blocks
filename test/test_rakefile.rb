@@ -1,5 +1,5 @@
-require 'rake'
-require 'persistent_blocks'
+require "persistent_blocks"
+require 'debugger'
 
 extend PersistentBlocks
 
@@ -16,8 +16,8 @@ persist :test2 do |test|
 end
 
 persist :test3, :test4  do |test2|
-  puts "About to simulate a 3 sec calc"
-  sleep(3)
+  puts "About to simulate a 2 sec calc"
+  sleep(2)
   puts "test2 = #{test2}"
   puts "test2 = '#{test2}', it should not be an array"
   [test2*1, test2.upcase]
@@ -38,6 +38,19 @@ persist :overide_test, input_overide: [:test3, :test4] do |x,y|
   puts "test3 (#{x}) was mapped to x"
   puts "test4 (#{y})) was mapped to y"
   1
+end
+
+persist :overide_test_no_bracket, :input_overide => :test3 do |x|
+  puts "input overide also works without brackets"
+end
+
+persist :set_task, :task => :with_set_task do
+  'My task was set with the :task option'
+end
+
+PBsubs.default_persistent_blocks_task = :non_default_task
+persist :not_a_default_task do
+  'I am not a default task, I am a non_default_task'
 end
 
 #persist(:should_fail1, :should_fail_2) do
